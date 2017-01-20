@@ -24,7 +24,7 @@ const config = {
   target: 'web',
   module: {
     rules: [
-      {test: /\.js$/, exclude: /node_modules/, use: ['babel-loader',]},
+      {test: /\.js$/, exclude: /node_modules/, use: ['babel-loader']},
       {test: /\.css$/, exclude: /node_modules/, use: ['style-loader', 'css-loader?modules']},
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, exclude: /node_modules/, use: ['file-loader']},
       {test: /\.(woff|woff2)$/, exclude: /node_modules/, use: ['url?prefix=font/&limit=5000']},
