@@ -1,16 +1,20 @@
 /* eslint global-require:"off" */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, browserHistory } from 'react-router';
 // AppContainer is a necessary wrapper component for HMR
 import { AppContainer } from 'react-hot-loader';
+import getRoutes from './routes/routes';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import './styles/styles.css';
 
 import App from './components/App';
 
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Component/>
+      <Router history={browserHistory} routes={getRoutes(Component)}/>
     </AppContainer>,
     document.getElementById('root')
   );
