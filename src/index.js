@@ -1,31 +1,34 @@
 /* eslint global-require:"off" */
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, browserHistory } from 'react-router';
-// AppContainer is a necessary wrapper component for HMR
+import { render } from 'react-dom';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
-import getRoutes from './routes/routes';
+import configureStore from './store/store';
+import Root from './components/Root';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/styles.css';
 
-import App from './components/App';
+const store = configureStore();
+//const history = syncHistoryWithStore(browserHistory, store);
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Router history={browserHistory} routes={getRoutes(Component)}/>
-    </AppContainer>,
-    document.getElementById('root')
-  );
-};
-
-render(App);
+render(
+  <AppContainer>
+    <Root store={store} history={browserHistory}/>
+  </AppContainer>,
+  document.getElementById('root')
+);
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NewApp = require('./components/App').default;
-    render(NewApp);
+  module.hot.accept('./components/Root', () => {
+    const NewRoot = require('./components/Root').default;
+    render(
+      <AppContainer>
+        <NewRoot store={store} history={browserHistory} />
+      </AppContainer>,
+      document.getElementById('root')
+    );
   });
 }
