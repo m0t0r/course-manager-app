@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as courseActions from '../../actions/course.actions';
 
 class CoursesPage extends Component {
 
@@ -19,8 +22,15 @@ class CoursesPage extends Component {
     this.setState({ course });
   }
 
-  onClickSave() {
-    alert(`Saving ${this.state.course.title}`);
+  onClickSave(e) {
+    e.preventDefault();
+    this.props.actions.createCourse(this.state.course);
+  }
+
+  courseRow(course, index) {
+    return (
+      <li className="list-group-item" key={index}>{course.title}</li>
+    );
   }
 
   render() {
@@ -28,6 +38,10 @@ class CoursesPage extends Component {
       <div>
         <h1>Courses</h1>
         <hr/>
+        <ul className="list-group">
+          {this.props.courses.map(this.courseRow)}
+        </ul>
+        <br/>
         <h2>Add course</h2>
         <form>
           <div className="form-group">
@@ -42,4 +56,21 @@ class CoursesPage extends Component {
   }
 }
 
-export default CoursesPage;
+CoursesPage.propTypes = {
+  courses: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    courses: state.courses
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(courseActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
