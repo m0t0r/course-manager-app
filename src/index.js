@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { loadCourses } from './actions/course.actions';
+import { loadAuthors } from './actions/author.actions';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/store';
 import Root from './components/Root';
@@ -14,6 +15,7 @@ import './styles/styles.css';
 const store = configureStore();
 
 store.dispatch(loadCourses());
+store.dispatch(loadAuthors());
 
 // const history = syncHistoryWithStore(browserHistory, store);
 
