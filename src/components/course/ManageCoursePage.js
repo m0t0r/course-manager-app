@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as courseActions from './../../actions/course.actions';
 import CourseForm from './CourseForm';
+import toastr from 'toastr';
 
 export class ManageCoursePage extends React.Component {
   constructor(props, context) {
@@ -76,6 +77,7 @@ export class ManageCoursePage extends React.Component {
           allAuthors={this.props.authors}
           course={this.state.course}
           errors={this.state.errors}
+          saving={this.state.saving}
           onSave={this.saveCourse}
           onChange={this.updateCourseState}
         />

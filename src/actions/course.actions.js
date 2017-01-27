@@ -1,5 +1,5 @@
 import courseApi from '../api/mockCourseApi';
-import { beginAjaxCall } from './ajax-status.actions';
+import { beginAjaxCall, ajaxCallError } from './ajax-status.actions';
 
 export const LOAD_COURSES_SUCCESS = 'LOAD_COURSES_SUCCESS';
 export const UPDATE_COURSE_SUCCESS = 'UPDATE_COURSE_SUCCESS';
@@ -35,6 +35,9 @@ export function saveCourse(course) {
           ? dispatch(updateCourseSuccess(courses))
           : dispatch(createCourseSuccess(courses));
       })
-      .catch(e => console.error(`Error: ' ${e}`));
+      .catch(e => {
+        dispatch(ajaxCallError());
+        console.error(`Error: ' ${e}`);
+      });
   };
 }

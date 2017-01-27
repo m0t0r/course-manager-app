@@ -10,6 +10,7 @@ import configureStore from './store/store';
 import Root from './components/Root';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'toastr/build/toastr.css';
 import './styles/styles.css';
 
 const store = configureStore();
