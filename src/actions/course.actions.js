@@ -1,4 +1,5 @@
 import courseApi from '../api/mockCourseApi';
+import { beginAjaxCall } from './ajax-status.actions';
 
 export const LOAD_COURSES_SUCCESS = 'LOAD_COURSES_SUCCESS';
 export const UPDATE_COURSE_SUCCESS = 'UPDATE_COURSE_SUCCESS';
@@ -18,6 +19,7 @@ export function createCourseSuccess(course) {
 
 export function loadCourses() {
   return function thunk(dispatch) {
+    dispatch(beginAjaxCall());
     return courseApi.getAllCourses()
       .then(courses => dispatch(loadCoursesSuccess(courses)))
       .catch(e => console.error(`Error: ' ${e}`));
@@ -26,6 +28,7 @@ export function loadCourses() {
 
 export function saveCourse(course) {
   return function thunk(dispatch) {
+    dispatch(beginAjaxCall());
     return courseApi.saveCourse(course)
       .then(courses => {
         course.id
