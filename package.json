@@ -8,7 +8,7 @@
     "serve": "node server",
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
-    "test": "mocha --reporter progress scripts/test-setup.js \"src/**/*.spec.js\"",
+    "test": "mocha --reporter spec scripts/test-setup.js \"src/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {

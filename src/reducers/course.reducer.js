@@ -12,10 +12,11 @@ export default function courseReducer(state = initialState.courses, action) {
     }
     case UPDATE_COURSE_SUCCESS: {
       return [
-        state.filter(course => course.id !== action.course.id),
+        ...state.filter(course => course.id !== action.course.id),
         Object.assign({}, action.course)
       ];
     }
+
     case LOAD_COURSES_SUCCESS: {
       return [...action.courses];
     }
